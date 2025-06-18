@@ -170,7 +170,7 @@ export default function Hero() {
                 className="px-8 py-4 rounded-lg font-semibold button-gradient-primary"
                 whileHover={{ scale: 1.05 }}
               >
-                Let's Connect
+                Let&apos;s Connect
               </motion.a>
               <motion.a
                 href="#projects"
@@ -187,7 +187,7 @@ export default function Hero() {
               transition={{ delay: 1.1 }}
               className="flex gap-6"
             >
-              {socialLinks.map((link, i) => (
+              {socialLinks.map((link) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
