@@ -1,8 +1,9 @@
 "use client";
 
-import { BRAND_NAME } from "@/lib/constants";
+import { BRAND_NAME, HERO_TRAITS, SOCIAL_LINKS } from "@/lib/constants";
+import { scrollToSection } from "@/lib/utils";
 import { Variants, motion } from "framer-motion";
-import { Code, Coffee, Github, Linkedin, Mail, Mouse, Zap } from "lucide-react";
+import { Code, Coffee, Mouse, Zap } from "lucide-react";
 
 export default function Hero() {
   const containerVariants: Variants = {
@@ -28,11 +29,37 @@ export default function Hero() {
     },
   };
 
-  const socialLinks = [
-    { href: "https://github.com", icon: Github, label: "GitHub" },
-    { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-    { href: "mailto:raymond@example.com", icon: Mail, label: "Email" },
-  ];
+  // Define the social links with icons
+
+  const socialLinks = () => {
+    return (
+      <motion.div
+        variants={itemVariants}
+        className="flex gap-4 justify-center md:justify-normal md:gap-6"
+      >
+        {SOCIAL_LINKS.map((link) => (
+          <motion.a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 "
+            whileHover={{
+              scale: 1.1,
+              rotate: 5,
+              backgroundColor: "rgb(59, 130, 246)",
+            }}
+            whileTap={{ scale: 0.9 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <link.icon size={20} />
+          </motion.a>
+        ))}
+      </motion.div>
+    );
+  };
 
   return (
     <section
@@ -77,8 +104,8 @@ export default function Hero() {
               variants={itemVariants}
               className="flex gap-4 justify-center mb-8"
             >
-              <motion.a
-                href="#contact"
+              <motion.button
+                onClick={() => scrollToSection("#contact")}
                 className="button-gradient-primary px-6 py-3 rounded-lg font-semibold transition-all duration-300 "
                 whileHover={{
                   scale: 1.05,
@@ -87,42 +114,18 @@ export default function Hero() {
                 whileTap={{ scale: 0.95 }}
               >
                 Get In Touch
-              </motion.a>
-              <motion.a
-                href="#projects"
+              </motion.button>
+              <motion.button
+                onClick={() => scrollToSection("#projects")}
                 className="border-2 border-slate-400 hover:border-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-slate-900"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 View My Work
-              </motion.a>
+              </motion.button>
             </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-4 justify-center"
-            >
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-all duration-300"
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 5,
-                    backgroundColor: "rgb(59, 130, 246)",
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                >
-                  <link.icon size={20} />
-                </motion.a>
-              ))}
-            </motion.div>
+            {socialLinks()}
           </motion.div>
         </div>
         <div className="hidden md:grid md:grid-cols-2 gap-12 items-center">
@@ -153,24 +156,18 @@ export default function Hero() {
               variants={itemVariants}
               className="flex gap-3 text-sm text-slate-400"
             >
-              <div className="flex items-center gap-2">
-                <Code size={16} />
-                <span>Learning & Growing</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap size={16} />
-                <span>Problem Solver</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Coffee size={16} />
-                <span>Coffee Enthusiast</span>
-              </div>
+              {HERO_TRAITS.map((trait, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <trait.icon size={16} />
+                  <span>{trait.text}</span>
+                </div>
+              ))}
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex gap-6">
-              <motion.a
-                href="#contact"
-                className=" px-8 py-4 rounded-lg font-semibold transition-all duration-300 button-gradient-primary"
+              <motion.button
+                onClick={() => scrollToSection("#contact")}
+                className=" px-8 py-4 rounded-lg font-semibold transition-all duration-300 button-gradient-primary cursor-pointer"
                 whileHover={{
                   scale: 1.05,
                   boxShadow: "0 10px 30px rgba(59, 130, 246, 0.3)",
@@ -178,39 +175,17 @@ export default function Hero() {
                 whileTap={{ scale: 0.95 }}
               >
                 Let&apos;s Connect
-              </motion.a>
-              <motion.a
-                href="#projects"
-                className="border-2 border-slate-400 hover:border-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-slate-900"
+              </motion.button>
+              <motion.button
+                onClick={() => scrollToSection("#projects")}
+                className="border-2 border-slate-400 hover:border-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-slate-900 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 View My Work
-              </motion.a>
+              </motion.button>
             </motion.div>
-
-            <motion.div variants={itemVariants} className="flex gap-6">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-all duration-300"
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 5,
-                    backgroundColor: "rgb(59, 130, 246)",
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8 + index * 0.1 }}
-                >
-                  <link.icon size={24} />
-                </motion.a>
-              ))}
-            </motion.div>
+            {socialLinks()}
           </motion.div>
 
           {/* Right Illustration */}

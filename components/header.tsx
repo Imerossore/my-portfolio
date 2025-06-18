@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Nav from "./nav";
 import MobileMenuButton from "./mobile-menu-btn";
+import Link from "next/link";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,15 +37,22 @@ export default function Header() {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6 ">
-        <motion.h1
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="text-2xl font-bold dark:text-white base-gradient-primary bg-clip-text text-transparent"
-        >
-          <span className="text-slate-500">&lt;</span>
-          {initials}
-          <span className="text-slate-500">/&gt;</span>
-        </motion.h1>
+        <Link href={"/"}>
+          <motion.h1
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-xl font-semibold dark:text-white base-gradient-primary bg-clip-text text-transparent cursor-pointer"
+          >
+            <span className="dark:text-white base-gradient-primary bg-clip-text text-transparent font-bold">
+              &lt;
+            </span>
+            {initials}
+            <span className="dark:text-white base-gradient-primary bg-clip-text text-transparent font-bold">
+              /&gt;
+            </span>
+          </motion.h1>
+        </Link>
+
         <div className="flex items-center ">
           <Nav isScrolled={isScrolled} />
           <ModeToggle />
