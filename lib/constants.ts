@@ -1,7 +1,7 @@
 export const WERSITE_NAME = "MY PERSONAL PORTFOLIO";
 export const SITE_DESCRIPTION =
   "A portfolio website to showcase my projects and skills.";
-export const BRAND_NAME = "Raymond Developer";
+export const BRAND_NAME = "Raymond Dev";
 
 export const NAV_ITEMS = [
   { href: "#hero", label: "Home" },

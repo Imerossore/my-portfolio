@@ -41,7 +41,9 @@ export default function Header() {
           whileTap={{ scale: 0.95 }}
           className="text-2xl font-bold dark:text-white base-gradient-primary bg-clip-text text-transparent"
         >
+          <span className="text-slate-500">&lt;</span>
           {initials}
+          <span className="text-slate-500">/&gt;</span>
         </motion.h1>
         <div className="flex items-center ">
           <Nav isScrolled={isScrolled} />
