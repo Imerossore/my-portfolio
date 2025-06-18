@@ -177,7 +177,7 @@ export default function Hero() {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Let's Connect
+                Let&apos;s Connect
               </motion.a>
               <motion.a
                 href="#projects"
